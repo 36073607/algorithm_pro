@@ -2,8 +2,9 @@
 #include <iostream>
 #include <algorithm>
 using namespace std;
-//Ñ¡ÔñÅÅĞò
-void selectionSort(int* arr, int sz)//ÕâÀïÎªÉıĞòÅÅÁĞ
+//é€‰æ‹©æ’åº
+//æ€»ç»“ï¼ši~n-1èŒƒå›´ä¸Šï¼Œæ‰¾åˆ°æœ€å°å€¼å¹¶æ”¾åœ¨iä½ç½®ï¼Œç„¶åi+1~n-1èŒƒå›´ä¸Šç»§ç»­
+void selectionSort(int* arr, int sz)//è¿™é‡Œä¸ºå‡åºæ’åˆ—
 {
 	if (sz < 2)
 		return;
@@ -22,13 +23,14 @@ void selectionSort(int* arr, int sz)//ÕâÀïÎªÉıĞòÅÅÁĞ
 	}
 }
 
-//Ã°ÅİÅÅĞò
-void bubbleSort(int* arr, int sz)//ÕâÀïÎªÉıĞòÅÅÁĞ
+//å†’æ³¡æ’åº
+//æ€»ç»“ï¼š0~ièŒƒå›´ä¸Šï¼Œç›¸é‚»ä½ç½®è¾ƒå¤§çš„æ•°æ»šä¸‹å»ï¼Œæœ€å¤§å€¼æœ€ç»ˆæ¥åˆ°iä½ç½®ï¼Œç„¶å0~i-1èŒƒå›´ä¸Šç»§ç»­
+void bubbleSort(int* arr, int sz)//è¿™é‡Œä¸ºå‡åºæ’åˆ—
 {
 	if (sz < 2)
 		return;
 
-	for (int i = 0; i < sz - 1; i++)//Ò»¹²sz-1ÂÖ
+	for (int i = 0; i < sz - 1; i++)//ä¸€å…±sz-1è½®
 	{
 		for (int j = 0; j < sz - i - 1; j++)
 		{
@@ -39,8 +41,9 @@ void bubbleSort(int* arr, int sz)//ÕâÀïÎªÉıĞòÅÅÁĞ
 
 }
 
-//²åÈëÅÅĞò
-void insertSort(int* arr, int sz)//ÕâÀïÎªÉıĞòÅÅÁĞ
+//æ’å…¥æ’åº
+//æ€»ç»“ï¼š0~ièŒƒå›´ä¸Šå·²ç»æœ‰åºï¼Œæ–°æ¥çš„æ•°ä»å³å‘å·¦æ»‘åˆ°ä¸å†å°çš„ä½ç½®æ’å…¥ï¼Œç„¶åç»§ç»­
+void insertSort(int* arr, int sz)//è¿™é‡Œä¸ºå‡åºæ’åˆ—
 {
 	if (sz < 2)
 		return;
@@ -76,4 +79,5 @@ int main()
 	cout << endl;
 
 	return 0;
+
 }
