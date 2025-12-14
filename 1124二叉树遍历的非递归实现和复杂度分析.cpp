@@ -10,7 +10,7 @@ struct TreeNode
 	TreeNode* rchild;
 };
 typedef TreeNode* BiTree;
-//�����ӡ���н�㣬�ǵݹ��
+//先序打印所有结点，非递归版
 stack<BiTree> s1;
 void preOrder(BiTree T)
 {
@@ -30,7 +30,7 @@ void preOrder(BiTree T)
 	}
 }
 
-//�����ӡ���н�㣬�ǵݹ��
+//中序打印所有结点，非递归版
 stack<BiTree> s2;
 void inOrder(BiTree T)
 {
@@ -54,11 +54,28 @@ void inOrder(BiTree T)
 	}
 }
 
-//�����ӡ���н�㣬�ǵݹ��
-//��һ������ջʵ��
-//���򣺸� �� ��
-//����'���� �� ��
-//������ �� ��  -->>����'�Ľ����ת�õ�
+void inOrderOperate(Stack* s, BiTree T)
+{
+    BiTree curr = T;
+    while (curr!=NULL || !isEmpty(s))
+    {
+        while (curr!=NULL)  // 将当前节点及其所有左子节点入栈
+        {
+            push(s, curr);
+            curr = curr->lchild;
+        }
+
+        curr = pop(s);  // 弹出栈顶节点
+        printf("%c ", curr->data);  // 访问该节点
+        curr = curr->rchild;  // 处理右子树
+    }
+}
+
+//后序打印所有结点，非递归版
+//法一：两个栈实现
+//先序：根 左 右
+//先序'：根 右 左
+//后序：左 右 根  -->>先序'的结果反转得到
 stack<BiTree> s3;
 stack<ElemType> collect;
 void postOrder(BiTree T)
@@ -84,7 +101,7 @@ void postOrder(BiTree T)
 	}
 }
 
-//������һ��ջʵ��
+//法二：一个栈实现
 stack<BiTree> s4;
 void postOrder_pro(BiTree T)
 {
@@ -92,19 +109,19 @@ void postOrder_pro(BiTree T)
 	{
 		s4.push(T);
 		BiTree prev = T;
-		//��prev��¼��һ����ӡ����Ľ��;���û��,���Ǹ����
+		//用prev记录上一个打印输出的结点;如果没有,就是根结点
 		while (!s4.empty())
 		{
 			BiTree curr = s4.top();
-			if (curr->lchild != NULL && curr->lchild != prev && curr->rchild != prev)//���������������δ������
+			if (curr->lchild != NULL && curr->lchild != prev && curr->rchild != prev)//如果左子树存在且未被处理
 			{
 				s4.push(curr->lchild);
 			}
-			else if (curr->rchild != NULL && curr->rchild != prev)//���������������δ������
+			else if (curr->rchild != NULL && curr->rchild != prev)//如果右子树存在且未被处理
 			{
 				s4.push(curr->rchild);
 			}
-			else//���������������� �� ����������Ϊ��
+			else//左右子树均被处理 或 左右子树均为空
 			{
 				cout << s4.top()->data;
 				prev = s4.top();
@@ -113,10 +130,11 @@ void postOrder_pro(BiTree T)
 		}
 	}
 }
-//ע��������������if���ʱ��ִ�е�һ�������������if���
+//注：当条件满足多个if语句时，执行第一个满足该条件的if语句
 
 
-//�������������Ӷȷ�����
-//a.ʱ�临�Ӷ�O(n),�ݹ�ͷǵݹ鶼��ÿ�����������޼��Σ���ȻO(n)
-//b.����ռ临�Ӷ�O(h),�ݹ�ͷǵݹ鶼��Ҫ�������߶�h�Ŀռ�������·��������ص��ϼ�ȥ
-//c.����ʱ�临�Ӷ�O(n),����ռ临�Ӷ�O(1)�ı�����ʽ��Morris����
+//遍历二叉树复杂度分析：
+//a.时间复杂度O(n),递归和非递归都是每个结点操作有限几次，当然O(n)
+//b.额外空间复杂度O(h),递归和非递归都需要二叉树高度h的空间来保存路径，方便回到上级去
+
+//c.存在时间复杂度O(n),额外空间复杂度O(1)的遍历方式：Morris遍历
