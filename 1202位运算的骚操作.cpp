@@ -11,7 +11,7 @@ using namespace std;
 bool isPowerOfTwo(int n)
 {
 	return n > 0 && n == (n & -n);
-	//return (num & (num - 1)) != 0;
+	//return n > 0 && (n & (n - 1)) == 0;
 }
 
 
@@ -139,5 +139,6 @@ int hammingDistance(int x, int y)
 
 
 //条件判断相比于赋值、位运算、算术运算是稍慢的。所以题目五、六的pro解法有现实意义（直接当模板用即可）
+
 
 
