@@ -114,7 +114,32 @@ doubleNode* reverseList(doubleNode* L)
 // 新链表是通过拼接给定的两个链表的所有节点组成的
 // 测试链接 : https://leetcode.cn/problems/merge-two-sorted-lists/
 
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        if (list1 == nullptr || list2 == nullptr)
+            return list1 == nullptr ? list2 : list1;
 
+        ListNode* newhead =
+            list1->val <= list2->val ? list1 : list2; // 新链表头结点
+        ListNode* cur1 = newhead->next;
+        ListNode* cur2 = newhead == list1 ? list2 : list1;
+        ListNode* pre = newhead; // 记录新链表最后一个结点，从头结点开始
+        while (cur1 != nullptr && cur2 != nullptr) {
+            if (cur1->val <= cur2->val) {
+                pre->next = cur1;
+                cur1 = cur1->next;
+            } else {
+                pre->next = cur2;
+                cur2 = cur2->next;
+            }
+            pre = pre->next;
+        }
+        pre->next = cur1 == nullptr ? cur2 : cur1;
+
+        return newhead;
+    }
+};
 
 typedef int ElemType;
 struct Node
@@ -155,6 +180,14 @@ Node* mergeTwoLists(Node* L1, Node* L2)//传来的两个链表都是升序排列
 
 
 //两个链表相加   （类似于用链表写高精度）
+// 给你两个 非空 的链表，表示两个非负的整数
+// 它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字
+// 请你将两个数相加，并以相同形式返回一个表示和的链表。
+// 你可以假设除了数字 0 之外，这两个数都不会以 0 开头
+// 测试链接：https://leetcode.cn/problems/add-two-numbers/
+
+
+
 typedef int ElemType;
 struct Node
 {
